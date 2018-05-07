@@ -1,11 +1,20 @@
-# nano-logger
+# Chiron-logger
+
+[![Build Status](https://travis-ci.org/ncou/Chiron-Logger.svg?branch=master)](https://travis-ci.org/ncou/Chiron-Logger)
+[![Coverage Status](https://coveralls.io/repos/github/ncou/Chiron-Logger/badge.svg?branch=master)](https://coveralls.io/github/ncou/Chiron-Logger?branch=master)
+[![CodeCov](https://codecov.io/gh/ncou/Chiron-Logger/branch/master/graph/badge.svg)](https://codecov.io/gh/ncou/Chiron-Logger)
+
+[![Total Downloads](https://img.shields.io/packagist/dt/chiron/logger.svg?style=flat-square)](https://packagist.org/packages/chiron/logger/stats)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/chiron/logger.svg?style=flat-square)](https://packagist.org/packages/chiron/logger/stats)
+
+[![StyleCI](https://styleci.io/repos/132444388/shield?style=flat)](https://styleci.io/repos/132444388)
 
 Example :
 
 ```php
 <?php
 // you can define minimal login level (ex : ERROR) if you add a second parameter, by default all the levels are logged
-$logger = new NanoLogger('./' . 'logger_'. date('Y-m-d') .'.log');
+$logger = new Chiron\Logger('./' . 'logger_'. date('Y-m-d') .'.log');
 $logger->log('error',  'Example error text' );
 
 //Multilines + replace value beetween "{}"
@@ -21,8 +30,4 @@ $logger->warning('Warning text : {TXT}', array('TXT' => 'Hector' ) );
 
 ```
 
-TODO : 
-- move the "log()" function as private + rename it to "_write()" + remove the check on the level exist in array.
-- allow in the constructor to define a callable function to use as formater, instead of the default formater defined in the class.
-
-Example for callable : https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Log/Logger.php#L40
+Minimalist PSR3 Logger based on : https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Log/Logger.php
