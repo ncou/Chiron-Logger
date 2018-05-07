@@ -1,0 +1,23 @@
+{
+    "name": "chiron/logger",
+    "type": "library",
+    "description": "Minimalist PSR3 Logger (mostly extracted from symfony)",
+    "keywords": ["logger", "log", "psr", "psr3", "symfony"],
+    "homepage": "https://github.com/ncou/Chiron-Logger",
+    "license": "MIT",
+    "require": {
+        "php": "^7.1.3",
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chiron\\": "src/"
+        }
+    },
+    "scripts": {
+        "phpunit": "phpunit --colors=always"
+    }
+}
