@@ -18,6 +18,7 @@
         }
     },
     "scripts": {
-        "phpunit": "phpunit --colors=always"
+        "phpunit": "phpunit --colors=always",
+        "test-coverage": "phpunit --coverage-clover clover.xml"
     }
 }
