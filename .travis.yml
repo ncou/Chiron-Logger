@@ -13,8 +13,7 @@ install:
   - travis_retry composer require --dev --no-interaction php-coveralls/php-coveralls
 
 script:
-  - composer test-coverage
-  - composer phpstan
+  - composer phpunit
 
 after_script:
   # Submit coverage report to Coveralls servers, see .coveralls.yml
