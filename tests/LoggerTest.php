@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chiron\Tests\Middleware;
+namespace Chiron\Logger\Test;
 
 use Chiron\Logger;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +21,7 @@ class LoggerTest extends TestCase
      */
     private $tmpFile;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'log';
         $this->logger = new Logger($this->tmpFile, LogLevel::DEBUG);

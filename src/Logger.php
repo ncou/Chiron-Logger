@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chiron;
+namespace Chiron\Logger;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
