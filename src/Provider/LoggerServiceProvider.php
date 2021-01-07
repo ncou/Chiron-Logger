@@ -31,17 +31,17 @@ use Psr\Log\NullLogger;
  *
  * Registers system services for Chiron, such as config manager, middleware router and dispatcher...
  */
-class LoggerServiceProvider implements ServiceProviderInterface
+final class LoggerServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * Register Chiron system services.
-     *
-     * @param ContainerInterface $container A DI container implementing ArrayAccess and container-interop.
-     */
     public function register(BindingInterface $container): void
     {
         // TODO : créer un Logger par défaut minimaliste et ne pas utiliser le NullLogger !!!!! => https://github.com/slimphp/Slim/blob/1df2f0d78589f1a7b5199c873ab1e7ec57fe3e0a/Slim/Logger.php
-        $container->bind(LoggerInterface::class, NullLogger::class);
+        // bind to the default engine (basic php-renderer) only if there is not already a binding.
+        if (! $container->bound(LoggerInterface::class)) {
+            $container->bind(LoggerInterface::class, NullLogger::class); // TODO : il faudrait plutot récupérer le logger par défaut depuis le LoggerManager un truc du genre 'return $loggerManager->getDefault():LoggerInterface'
+        }
+
+        $container->mutation(\Psr\Log\LoggerAwareInterface::class, [\Chiron\Logger\LoggerAwareMutation::class, 'mutation']);
 
         // add alias
         //$container->alias('logger', LoggerInterface::class);

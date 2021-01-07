@@ -31,5 +31,12 @@
         "phpstan": "phpstan analyse src --level=max",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "chiron": {
+            "providers": [
+                "Chiron\\Logger\\Provider\\LoggerServiceProvider"
+            ]
+        }
     }
 }
