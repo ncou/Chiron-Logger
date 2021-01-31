@@ -10,6 +10,8 @@ use Chiron\Container\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Chiron\Logger\LogManager;
+use Closure;
 
 //https://github.com/userfrosting/UserFrosting/blob/master/app/system/ServicesProvider.php
 //https://github.com/slimphp/Slim/blob/3.x/Slim/DefaultServicesProvider.php
@@ -31,15 +33,16 @@ use Psr\Log\NullLogger;
  *
  * Registers system services for Chiron, such as config manager, middleware router and dispatcher...
  */
-final class LoggerServiceProvider implements ServiceProviderInterface
+final class LoggingServiceProvider implements ServiceProviderInterface
 {
     public function register(BindingInterface $container): void
     {
         // TODO : créer un Logger par défaut minimaliste et ne pas utiliser le NullLogger !!!!! => https://github.com/slimphp/Slim/blob/1df2f0d78589f1a7b5199c873ab1e7ec57fe3e0a/Slim/Logger.php
         // bind to the default engine (basic php-renderer) only if there is not already a binding.
-        if (! $container->bound(LoggerInterface::class)) {
-            $container->bind(LoggerInterface::class, NullLogger::class); // TODO : il faudrait plutot récupérer le logger par défaut depuis le LoggerManager un truc du genre 'return $loggerManager->getDefault():LoggerInterface'
-        }
+        //if (! $container->bound(LoggerInterface::class)) {
+            //$container->bind(LoggerInterface::class, NullLogger::class); // TODO : il faudrait plutot récupérer le logger par défaut depuis le LoggerManager un truc du genre 'return $loggerManager->getDefault():LoggerInterface'
+            $container->bind(LoggerInterface::class, Closure::fromCallable([$this, 'getDefaultLogger']));
+        //}
 
         $container->mutation(\Psr\Log\LoggerAwareInterface::class, [\Chiron\Logger\LoggerAwareMutation::class, 'mutation']);
 
@@ -47,6 +50,13 @@ final class LoggerServiceProvider implements ServiceProviderInterface
         //$container->alias('logger', LoggerInterface::class);
         //$container->alias('log', LoggerInterface::class);
     }
+
+
+    private function getDefaultLogger(LogManager $manager): LoggerInterface
+    {
+        return $manager->getDefaultLogger();
+    }
+
 
     /*
         public function register()

@@ -35,7 +35,7 @@
     "extra": {
         "chiron": {
             "providers": [
-                "Chiron\\Logger\\Provider\\LoggerServiceProvider"
+                "Chiron\\Logger\\Provider\\LoggingServiceProvider"
             ]
         }
     }

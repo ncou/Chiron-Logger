@@ -6,7 +6,7 @@ namespace Chiron\Logger\Facade;
 
 use Chiron\Core\Facade\AbstractFacade;
 
-final class Logger extends AbstractFacade
+final class Log extends AbstractFacade
 {
     /**
      * {@inheritdoc}
@@ -14,6 +14,6 @@ final class Logger extends AbstractFacade
     protected static function getFacadeAccessor(): string
     {
         // phpcs:ignore SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
-        return \Psr\Log\LoggerInterface::class;
+        return \Chiron\Logger\LogManager::class;
     }
 }
